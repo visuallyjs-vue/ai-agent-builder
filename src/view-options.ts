@@ -1,5 +1,5 @@
-import { Edge, EVENT_TAP, VisuallyJsModel, Node } from "@visuallyjs/browser-ui"
-import { VueWrapperProps, VueSurfaceViewOptions } from "@visuallyjs/browser-ui-vue"
+import { Edge, EVENT_TAP } from "@visuallyjs/browser-ui"
+import { VueEdgeWrapperProps } from "@visuallyjs/browser-ui-vue"
 import { isCondition } from "./model-operations"
 import { h } from 'vue'
 
@@ -10,14 +10,14 @@ import AgentNode from "./components/AgentNode.vue"
 import PlaceholderNode from "./components/PlaceholderNode.vue"
 
 const EdgeOverlay = {
-    props: ['obj', 'model'],
-    setup(props: VueWrapperProps<Edge>) {
+    props: ['edge', 'model'],
+    setup(props: VueEdgeWrapperProps) {
         return () => {
-            const label = props.obj.source.data.label
-            const isDecision = isCondition(props.obj.source)
+            const label = props.edge.source.data.label
+            const isDecision = isCondition(props.edge.source)
             if (isDecision && label) {
                 return h('div', { class: 'condition-label' }, [
-                    h('span', { onClick: () => props.model.setSelection(props.obj.source) }, label)
+                    h('span', { onClick: () => props.model.setSelection(props.edge.source) }, label)
                 ])
             }
             return null
@@ -25,7 +25,7 @@ const EdgeOverlay = {
     }
 }
 
-export default function getViewOptions(): VueSurfaceViewOptions {
+export default function getViewOptions() {
     return {
         nodes: {
             trigger: {
