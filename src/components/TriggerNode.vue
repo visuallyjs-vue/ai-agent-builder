@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import { inject, computed } from 'vue';
 import { lookupIcon } from "../model-operations";
-import { VueWrapperProps } from "@visuallyjs/browser-ui-vue";
+import {VueWrapperProps} from "@visuallyjs/browser-ui-vue";
 import LeafAction from "./LeafAction.vue";
 import NodeOptions from "./NodeOptions.vue";
+import {Node} from "@visuallyjs/browser-ui";
 
-const props = defineProps<VueWrapperProps<any>>();
+const {data, vertex} = defineProps<VueWrapperProps<Node>>();
 
 const { selectTrigger } = inject<any>('builderContext');
 
-const isLeaf = computed(() => props.vertex.getAllSourceEdges().length === 0);
-const isUnset = computed(() => !props.data.provider || !props.data.trigger);
+const isLeaf = computed(() => vertex.getAllSourceEdges().length === 0);
+const isUnset = computed(() => !data.provider || !data.trigger);
 </script>
 
 <template>

@@ -4,8 +4,9 @@ import { lookupIcon } from "../model-operations";
 import NodeOptions from "./NodeOptions.vue";
 import { VueWrapperProps } from "@visuallyjs/browser-ui-vue";
 import LeafAction from "./LeafAction.vue";
+import { Node } from "@visuallyjs/browser-ui"
 
-const {data, vertex} = defineProps<VueWrapperProps<any>>();
+const {data, vertex} = defineProps<VueWrapperProps<Node>>();
 
 const isLeaf = computed(() => vertex.getAllSourceEdges().length === 0);
 </script>

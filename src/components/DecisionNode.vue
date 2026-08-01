@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import DeleteNode from "./DeleteNode.vue";
 import { lookupIcon } from "../model-operations";
-import { VueWrapperProps } from "@visuallyjs/browser-ui-vue";
+import {VueWrapperProps} from "@visuallyjs/browser-ui-vue";
+import {Node} from "@visuallyjs/browser-ui";
 
-defineProps<VueWrapperProps<any>>();
+const {data, vertex, ui} = defineProps<VueWrapperProps<Node>>();
 </script>
 
 <template>
@@ -11,7 +12,7 @@ defineProps<VueWrapperProps<any>>();
     <div class="vjs-ai-node-header">
       <img class="vjs-ai-node-icon" :src="lookupIcon(data)" :alt="data.provider || ''" />
       <div class="vjs-ai-node-name" :title="data.name">{{ data.name }}</div>
-      <DeleteNode :vertex="vertex" :model="model" />
+      <DeleteNode :vertex="vertex" :model="model" :ui="ui" />
     </div>
     <div v-for="condition in data.conditions" :key="condition.id" :data-vjs-port="condition.id" :data-vjs-source="true" />
   </div>
